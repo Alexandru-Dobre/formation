@@ -1,0 +1,12 @@
+<div id="{{'block'+block.id}}" class="owl-carousel" ng-controller="CarouselController as carouselCtrl">
+    <div ng-repeat="content in carouselCtrl.contents track by $index" ng-if="content.fields[blockConfig.imageField]">
+        <a ng-href="{{content.detailPageUrl}}" >
+            <div ng-controller="HybridExternalController as heCtrl"
+                 ng-bind-html="heCtrl.html"></div>
+                <div ng-if="blockConfig.showCaption" class="rubedo-caption">
+                    <h3>{{content.fields.text}}</h3>
+                    <p ng-if="blockConfig.showSummary">{{content.fields.summary}}</p>
+                </div>
+        </a>
+    </div>
+</div>
