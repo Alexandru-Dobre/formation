@@ -1,0 +1,38 @@
+<nav class="navbar navbar-inverted" role="navigation" ng-controller="MenuController as menuCtrl">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">{{rubedo.translate("Blocks.Navigation.Label.ToggleNavigation", "Toggle navigation")}}</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a ng-if="blockConfig.displayRootPage" class="navbar-brand" ng-href="{{menuCtrl.menu.url}}">{{menuCtrl.menu.text}}</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ng-repeat="page in menuCtrl.menu.pages track by $index"
+                    ng-class="{active:menuCtrl.currentRouteline.indexOf(page.url+'/') > -1 ||  menuCtrl.currentRouteline.indexOf(page.url,menuCtrl.currentRouteline.length-page.url.length) > -1, dropdown:page.pages&&blockConfig.menuLevel>1}">
+                    <a ng-if="!page.pages||blockConfig.menuLevel<=1" ng-href="{{page.url}}"> {{page.text}}</a>
+                    <a ng-if="page.pages&&blockConfig.menuLevel>1" class="dropdown-toggle cursor-as-pointer" data-toggle="dropdown" >{{page.text}} <span class="caret"></span></a>
+                    <ul ng-if="page.pages&&blockConfig.menuLevel>1" class="dropdown-menu" role="menu">
+                        <li ng-if="!blockConfig.disableLevelOne" ng-class="{active:rubedo.current.page.id==page.id}"><a ng-href="{{page.url}}">{{page.text}}</a></li>
+                        <li ng-if="!blockConfig.disableLevelOne" class="divider"></li>
+                        <li ng-repeat="subpage in page.pages track by $index" ng-class="{active:menuCtrl.currentRouteline.indexOf(subpage.url+'/') > -1 ||  menuCtrl.currentRouteline.indexOf(subpage.url,menuCtrl.currentRouteline.length-subpage.url.length) > -1}">
+                            <a ng-href="{{subpage.url}}">{{subpage.text}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form" ng-if="menuCtrl.searchEnabled" ng-submit="menuCtrl.onSubmit()" role="form">
+                    <div class="input-group">
+                        <input class="form-control" type="text" ng-model="menuCtrl.query" ng-attr-placeholder="{{rubedo.translate('Search.Label.Search','Search')}}"/>
+                            <span class="input-group-btn"><button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search"></span></button></span>
+                    </div>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
