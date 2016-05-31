@@ -1,4 +1,4 @@
-angular.module("rubedoBlocks").lazy.controller("CarouselController",["$scope","RubedoContentsService",function($scope,RubedoContentsService){
+angular.module("rubedoBlocks").lazy.controller("CarouselVideoController",["$scope","RubedoContentsService",function($scope,RubedoContentsService){
     var me=this;
     me.contents=[];
     var blockConfig=$scope.blockConfig;

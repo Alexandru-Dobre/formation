@@ -1,4 +1,4 @@
-<div id="{{'block'+block.id}}" class="owl-carousel" ng-controller="CarouselController as carouselCtrl">
+<div id="{{'block'+block.id}}" class="owl-carousel" ng-controller="CarouselVideoController as carouselCtrl">
     <div ng-repeat="content in carouselCtrl.contents track by $index" ng-if="content.fields[blockConfig.imageField]">
         <a ng-href="{{content.detailPageUrl}}" >
             <div ng-controller="HybridExternalController as heCtrl"
